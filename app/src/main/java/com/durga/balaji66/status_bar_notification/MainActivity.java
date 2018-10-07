@@ -10,23 +10,31 @@ import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.durga.balaji66.status_bar_notification.Fragments.CandidateListFragment;
+
 public class MainActivity extends AppCompatActivity {
-    private Button button;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        button =findViewById(R.id.button);
-        displayNotification();
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+
+
+        //displayNotification();
+        Fragment fragment = new CandidateListFragment();
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.add(R.id.homeFragment,fragment);
+        transaction.commit();
 
 
 //                Intent intent = new Intent(MainActivity.this, MainActivity.class);
@@ -39,9 +47,6 @@ public class MainActivity extends AppCompatActivity {
 //                                .setContentIntent(contentIntent);
 //                NotificationManager notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 //                notificationManager.notify(1, mBuilder.build());
-
-            }
-        });
 
     }
 
@@ -65,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(getApplicationContext(), NOTIFICATION_CHANNEL_ID);
-
         notificationBuilder.setAutoCancel(true)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setWhen(System.currentTimeMillis())
