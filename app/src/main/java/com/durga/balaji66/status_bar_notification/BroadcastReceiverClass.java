@@ -47,17 +47,11 @@ public class BroadcastReceiverClass extends BroadcastReceiver {
         //if there is a network
         if (activeNetwork != null) {
 
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
                     //if connected to wifi or mobile data plan
                     if (activeNetwork.getType() == ConnectivityManager.TYPE_WIFI || activeNetwork.getType() == ConnectivityManager.TYPE_MOBILE) {
-                        Toast.makeText(context,"connected",Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "connected", Toast.LENGTH_LONG).show();
                         getCandidateList();
                     }
-                }
-            }, 2000);
 
         }
     }
